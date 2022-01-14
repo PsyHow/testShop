@@ -1,0 +1,38 @@
+.cartBox {
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+.orderBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 200px;
+  border: 1px solid black;
+
+  .orderTitle {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .orderButton {
+    width: 100px;
+  }
+}
+  .itemsBox {
+    margin-top: 40px;
+    justify-content: center;
+    border: 1px solid black;
+
+    .item {
+      width: 250px;
+      padding: 10px;
+      border: 1px solid gray;
+      display: flex;
+      flex-direction: column;
+      margin: 20px;
+    }
+  }
+}
