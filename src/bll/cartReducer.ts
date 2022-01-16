@@ -1,6 +1,6 @@
 const initialState = {
   items: [] as ProductsType[],
-  itemCount: 1,
+  itemCount: 0,
   totalPriceCount: 0,
 };
 
@@ -16,7 +16,6 @@ export const cartReducer = (
           m.id === action.item.id
             ? {
                 ...m,
-                // eslint-disable-next-line @typescript-eslint/no-magic-numbers
                 itemCount: action.item.itemCount + 1,
                 totalPrice: action.item.totalPrice + m.price,
               }
@@ -32,7 +31,6 @@ export const cartReducer = (
           m.id === action.item.id
             ? {
                 ...m,
-                // eslint-disable-next-line @typescript-eslint/no-magic-numbers
                 itemCount: action.item.itemCount - 1,
                 totalPrice: action.item.totalPrice - m.price,
               }
@@ -63,7 +61,6 @@ export const cartReducer = (
     case 'GET_TOTAL_PRICE': {
       return {
         ...state,
-        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
         totalPriceCount: state.items.reduce((acc, item) => acc + item.totalPrice, 0),
       };
     }

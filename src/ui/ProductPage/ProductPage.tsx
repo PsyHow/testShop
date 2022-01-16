@@ -1,11 +1,10 @@
 import { FC } from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import styles from './ProductPage.module.scss';
 
 import { addItemInCart, ProductsType } from 'bll/cartReducer';
-import { AppRootStateType } from 'bll/store';
 
 type PropsType = {
   products: ProductsType[];
@@ -13,13 +12,9 @@ type PropsType = {
 
 export const ProductPage: FC<PropsType> = ({ products }) => {
   const dispatch = useDispatch();
-  const totalPrice = useSelector<AppRootStateType, number>(
-    st => st.cartReducer.totalPriceCount,
-  );
-
   const addItemHandle = (item: ProductsType): void => {
     let productItems = JSON.parse(localStorage.getItem('product')!);
-    if (productItems === null) productItems = [];
+    if (productItems === null || productItems === undefined) productItems = [];
     localStorage.setItem('product', JSON.stringify(item));
     productItems.push(item);
     localStorage.setItem('product', JSON.stringify(productItems));
@@ -38,7 +33,6 @@ export const ProductPage: FC<PropsType> = ({ products }) => {
           <button onClick={() => addItemHandle(items)} type="button">
             Добавить в корзину
           </button>
-          {totalPrice}
         </div>
       ))}
     </div>
