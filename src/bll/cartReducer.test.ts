@@ -3,6 +3,7 @@ import {
   cartReducer,
   decrementItemCount,
   deleteItem,
+  getItemsInCart,
   getTotalPrice,
   incItemCount,
   InitialStateType,
@@ -90,4 +91,25 @@ test('decrement item count should be correct', () => {
   expect(endState.items[1].itemCount).toBe(1);
   expect(endState.items[1].totalPrice).toBe(1200);
   expect(endState.items[0].totalPrice).toBe(0);
+});
+
+test('items should be get', () => {
+  const item = {
+    id: 1,
+    name: 'Phone',
+    itemCount: 4,
+    photo: '',
+    price: 100,
+    totalPrice: 400,
+  };
+  const items = JSON.parse(localStorage.getItem('items') || '[]');
+  items.push(item);
+  localStorage.setItem('product', JSON.stringify(items));
+
+  const action = getItemsInCart(items);
+
+  const endState = cartReducer(startState, action);
+
+  expect(endState.items[0].name).toBe('Phone');
+  expect(endState.items.length).toBe(1);
 });

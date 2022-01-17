@@ -1,11 +1,10 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import styles from './ProductPage.module.scss';
 
-import { addItemInCart, getItemsInCart, ProductsType } from 'bll/cartReducer';
-import { AppRootStateType } from 'bll/store';
+import { addItemInCart, ProductsType } from 'bll/cartReducer';
 
 type PropsType = {
   products: ProductsType[];
@@ -19,14 +18,6 @@ export const ProductPage: FC<PropsType> = ({ products }) => {
     localStorage.setItem('product', JSON.stringify(productItems));
     dispatch(addItemInCart(item));
   };
-
-  // useEffect(() => {
-  //   const valueAsString = localStorage.getItem('product');
-  //   if (valueAsString && valueAsString) {
-  //     const itemsLocal = JSON.parse(valueAsString);
-  //     dispatch(getItemsInCart(itemsLocal));
-  //   }
-  // }, []);
 
   return (
     <div className={styles.productBox}>

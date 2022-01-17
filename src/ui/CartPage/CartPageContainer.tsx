@@ -14,25 +14,17 @@ import {
   incItemCount,
   ProductsType,
 } from 'bll/cartReducer';
-import { AppRootStateType } from 'bll/store';
+import { selectItems, selectTotalPriceCount } from 'selectors/selectors';
 
 export const CartPageContainer: FC = () => {
   const dispatch = useDispatch();
-
-  const itemsInCart = useSelector<AppRootStateType, ProductsType[]>(
-    st => st.cartReducer.items,
-  );
-
-  const totalPrice = useSelector<AppRootStateType, number>(
-    st => st.cartReducer.totalPriceCount,
-  );
+  const itemsInCart = useSelector(selectItems);
+  const totalPrice = useSelector(selectTotalPriceCount);
 
   useEffect(() => {
     const valueAsString = localStorage.getItem('product');
-    if (valueAsString && valueAsString) {
+    if (valueAsString) {
       const itemsLocal = JSON.parse(valueAsString);
-      console.log(itemsLocal, 'localStorage items');
-      localStorage.setItem('product', JSON.stringify(itemsLocal));
       dispatch(getItemsInCart(itemsLocal));
       dispatch(getTotalPrice(totalPrice));
     }
@@ -41,12 +33,17 @@ export const CartPageContainer: FC = () => {
   const inc = (products: ProductsType): void => {
     dispatch(incItemCount(products));
   };
-  const decrement = (items: ProductsType): void => {
-    // dispatch(decrementItemCount(items));
-    dispatch(deleteItem(items.id));
-    localStorage.setItem('product', JSON.stringify(itemsInCart));
+  const decrement = (item: ProductsType): void => {
+    dispatch(decrementItemCount(item));
+    if (item.itemCount <= 1) {
+      dispatch(deleteItem(item.id));
+    }
   };
-  console.log(itemsInCart, 'items from bll');
+
+  useEffect(() => {
+    localStorage.setItem('product', JSON.stringify(itemsInCart));
+  }, [itemsInCart]);
+
   return (
     <div className={styles.cartBox}>
       <Order />
