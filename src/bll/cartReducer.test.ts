@@ -8,6 +8,7 @@ import {
   incItemCount,
   InitialStateType,
 } from 'bll/cartReducer';
+import { itemIsAdded, productReducer } from 'bll/productReducer';
 
 let startState: InitialStateType = { items: [], itemCount: 0, totalPriceCount: 0 };
 beforeEach(() => {
@@ -20,6 +21,7 @@ beforeEach(() => {
         totalPrice: 850,
         photo: 'add url',
         itemCount: 1,
+        isAdded: false,
       },
       {
         id: 2,
@@ -28,6 +30,7 @@ beforeEach(() => {
         totalPrice: 1200,
         photo: 'add url',
         itemCount: 1,
+        isAdded: false,
       },
     ],
     itemCount: 0,
@@ -60,13 +63,16 @@ test('item should be added', () => {
     totalPrice: 230,
     photo: 'add url',
     itemCount: 1,
+    isAdded: false,
   });
 
-  const endState = cartReducer(startState, action);
+  const testState = { items: [], itemCount: 0, totalPriceCount: 0 };
+
+  const endState = cartReducer(testState, action);
 
   expect(endState.items.length).toBe(3);
   expect(endState.items[2].id).toBe(3);
-  expect(endState.items[2].name).toBe('Наушники');
+  expect(endState.items[0].name).toBe('Наушники');
 });
 
 test('increment item count should be correct', () => {
@@ -112,4 +118,36 @@ test('items should be get', () => {
 
   expect(endState.items[0].name).toBe('Phone');
   expect(endState.items.length).toBe(1);
+});
+
+test('item isAdded must be switch', () => {
+  const testIsAddedState = {
+    products: [
+      {
+        id: 1,
+        name: 'Мобильный телефон',
+        price: 850,
+        totalPrice: 850,
+        photo: 'add url',
+        itemCount: 1,
+        isAdded: false,
+      },
+      {
+        id: 2,
+        name: 'Ноутбук',
+        price: 1200,
+        totalPrice: 1200,
+        photo: 'add url',
+        itemCount: 1,
+        isAdded: false,
+      },
+    ],
+  };
+
+  const action = itemIsAdded(testIsAddedState.products[0]);
+
+  const endState = productReducer(testIsAddedState, action);
+
+  expect(endState.products[0].isAdded).toBe(true);
+  expect(endState.products[0].name).toBe('Мобильный телефон');
 });

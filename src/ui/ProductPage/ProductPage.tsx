@@ -1,22 +1,22 @@
 import { FC } from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './ProductPage.module.scss';
 
-import { addItemInCart, ProductsType } from 'bll/cartReducer';
+import { ProductsType } from 'bll/cartReducer';
+import { itemIsAdded } from 'bll/productReducer';
+import { selectItemsForProductPage } from 'selectors/selectors';
 
-type PropsType = {
-  products: ProductsType[];
-};
-
-export const ProductPage: FC<PropsType> = ({ products }) => {
+export const ProductPage: FC = () => {
   const dispatch = useDispatch();
+  const products = useSelector(selectItemsForProductPage);
+
   const addItemHandle = (item: ProductsType): void => {
     const productItems = JSON.parse(localStorage.getItem('product') || '[]');
     productItems.push(item);
     localStorage.setItem('product', JSON.stringify(productItems));
-    dispatch(addItemInCart(item));
+    dispatch(itemIsAdded(item));
   };
 
   return (
@@ -28,8 +28,12 @@ export const ProductPage: FC<PropsType> = ({ products }) => {
           <span>{item.name}</span>
           <b>Цена: </b>
           <span>{item.price}</span>
-          <button onClick={() => addItemHandle(item)} type="button">
-            Добавить в корзину
+          <button
+            onClick={() => addItemHandle(item)}
+            type="button"
+            disabled={item.isAdded}
+          >
+            {!item.isAdded ? 'Добавить в корзину' : 'Товар добавлен в корзину'}
           </button>
         </div>
       ))}

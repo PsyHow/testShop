@@ -1,6 +1,8 @@
 .header {
   height: 50px;
   background-color: #0a9297;
+  display: flex;
+  justify-content: space-between;
 
   & a {
     text-decoration: none;
