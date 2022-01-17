@@ -1,10 +1,11 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './ProductPage.module.scss';
 
-import { addItemInCart, ProductsType } from 'bll/cartReducer';
+import { addItemInCart, getItemsInCart, ProductsType } from 'bll/cartReducer';
+import { AppRootStateType } from 'bll/store';
 
 type PropsType = {
   products: ProductsType[];
@@ -13,24 +14,30 @@ type PropsType = {
 export const ProductPage: FC<PropsType> = ({ products }) => {
   const dispatch = useDispatch();
   const addItemHandle = (item: ProductsType): void => {
-    let productItems = JSON.parse(localStorage.getItem('product')!);
-    if (productItems === null || productItems === undefined) productItems = [];
-    localStorage.setItem('product', JSON.stringify(item));
+    const productItems = JSON.parse(localStorage.getItem('product') || '[]');
     productItems.push(item);
     localStorage.setItem('product', JSON.stringify(productItems));
     dispatch(addItemInCart(item));
   };
 
+  // useEffect(() => {
+  //   const valueAsString = localStorage.getItem('product');
+  //   if (valueAsString && valueAsString) {
+  //     const itemsLocal = JSON.parse(valueAsString);
+  //     dispatch(getItemsInCart(itemsLocal));
+  //   }
+  // }, []);
+
   return (
     <div className={styles.productBox}>
-      {products.map(items => (
-        <div key={items.id} className={styles.productItem}>
-          <div className={styles.productPhoto}>{items.photo}</div>
+      {products.map(item => (
+        <div key={item.id} className={styles.productItem}>
+          <div className={styles.productPhoto}>{item.photo}</div>
           <b>Наименование: </b>
-          <span>{items.name}</span>
+          <span>{item.name}</span>
           <b>Цена: </b>
-          <span>{items.price}</span>
-          <button onClick={() => addItemHandle(items)} type="button">
+          <span>{item.price}</span>
+          <button onClick={() => addItemHandle(item)} type="button">
             Добавить в корзину
           </button>
         </div>

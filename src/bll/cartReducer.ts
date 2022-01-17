@@ -25,19 +25,20 @@ export const cartReducer = (
       };
     }
     case 'DECREMENT_ITEM_COUNT': {
-      return {
+      const copy = {
         ...state,
         items: state.items.map(m =>
           m.id === action.item.id
             ? {
                 ...m,
                 itemCount: action.item.itemCount - 1,
-                totalPrice: action.item.totalPrice - m.price,
+                totalPrice: m.totalPrice - action.item.totalPrice,
               }
             : m,
         ),
-        totalPriceCount: state.totalPriceCount - action.item.price,
+        // totalPriceCount: state.totalPriceCount - action.item.price,
       };
+      return copy;
     }
     case 'ADD_ITEM_IN_CART': {
       return {
@@ -47,16 +48,19 @@ export const cartReducer = (
       };
     }
     case 'DELETE_ITEM': {
-      return {
+      const copy = {
         ...state,
         items: state.items.filter(f => f.id !== action.id),
       };
+      // localStorage.setItem('product', JSON.stringify(state.items));
+      return copy;
     }
     case 'GET_ITEMS_IN_CART': {
-      return {
+      const copy = {
         ...state,
         items: action.items,
       };
+      return copy;
     }
     case 'GET_TOTAL_PRICE': {
       return {

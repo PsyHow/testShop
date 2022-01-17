@@ -29,8 +29,10 @@ export const CartPageContainer: FC = () => {
 
   useEffect(() => {
     const valueAsString = localStorage.getItem('product');
-    if (valueAsString) {
+    if (valueAsString && valueAsString) {
       const itemsLocal = JSON.parse(valueAsString);
+      console.log(itemsLocal, 'localStorage items');
+      localStorage.setItem('product', JSON.stringify(itemsLocal));
       dispatch(getItemsInCart(itemsLocal));
       dispatch(getTotalPrice(totalPrice));
     }
@@ -40,12 +42,11 @@ export const CartPageContainer: FC = () => {
     dispatch(incItemCount(products));
   };
   const decrement = (items: ProductsType): void => {
-    dispatch(decrementItemCount(items));
-    if (items.itemCount <= 1) {
-      dispatch(deleteItem(items.id));
-    }
+    // dispatch(decrementItemCount(items));
+    dispatch(deleteItem(items.id));
+    localStorage.setItem('product', JSON.stringify(itemsInCart));
   };
-  localStorage.setItem('product', JSON.stringify(itemsInCart));
+  console.log(itemsInCart, 'items from bll');
   return (
     <div className={styles.cartBox}>
       <Order />
