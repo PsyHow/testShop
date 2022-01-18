@@ -9,15 +9,24 @@ import { ProductsType } from 'bll/cartReducer';
 import { CartPageItemsList } from 'ui/CartPage/CartPageItemsList/CartPageItemsList';
 
 type PropsType = {
-  decrement: (item: ProductsType) => void;
-  inc: (item: ProductsType) => void;
+  decreaseProductQuantity: (item: ProductsType) => void;
+  increaseProductQuantity: (item: ProductsType) => void;
   items: ProductsType[];
   totalPrice: number;
 };
 
-export const CartPage: FC<PropsType> = ({ inc, decrement, items, totalPrice }) => (
+export const CartPage: FC<PropsType> = ({
+  increaseProductQuantity,
+  decreaseProductQuantity,
+  items,
+  totalPrice,
+}) => (
   <Grid container spacing={0} className={styles.gridContainer}>
-    <CartPageItemsList items={items} inc={inc} decrement={decrement} />
+    <CartPageItemsList
+      items={items}
+      inc={increaseProductQuantity}
+      decrement={decreaseProductQuantity}
+    />
     <div>
       <Order />
       <div className={styles.price}>

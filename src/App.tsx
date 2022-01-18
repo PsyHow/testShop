@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 
 import { getItemsInCart, getTotalPrice } from 'bll/cartReducer';
+import { PATH } from 'constants/constants';
 import { selectItems, selectTotalPriceCount } from 'selectors/selectors';
 import { CartPageContainer } from 'ui/CartPage/CartPageContainer';
 import { Header } from 'ui/Header/Header';
@@ -33,7 +34,7 @@ const App = (): ReactElement => {
       <Header />
       <Routes>
         <Route path="/" element={<ProductPageContainer />} />
-        <Route path="cartPage" element={<CartPageContainer />} />
+        <Route path={PATH.CART_PAGE} element={<CartPageContainer />} />
       </Routes>
     </div>
   );

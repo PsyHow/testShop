@@ -17,10 +17,11 @@ export const CartPageContainer: FC = () => {
   const itemsInCart = useSelector(selectItems);
   const totalPrice = useSelector(selectTotalPriceCount);
 
-  const inc = (products: ProductsType): void => {
+  const increaseProductQuantity = (products: ProductsType): void => {
     dispatch(incItemCount(products));
   };
-  const decrement = (item: ProductsType): void => {
+
+  const decreaseProductQuantity = (item: ProductsType): void => {
     dispatch(decrementItemCount(item));
     if (item.itemCount <= 1) {
       dispatch(deleteItem(item.id));
@@ -29,9 +30,9 @@ export const CartPageContainer: FC = () => {
 
   return (
     <CartPage
-      inc={inc}
+      increaseProductQuantity={increaseProductQuantity}
       items={itemsInCart}
-      decrement={decrement}
+      decreaseProductQuantity={decreaseProductQuantity}
       totalPrice={totalPrice}
     />
   );
