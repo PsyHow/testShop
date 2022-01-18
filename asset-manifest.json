@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/testShop/static/css/main.e69b138e.css",
-    "main.js": "/testShop/static/js/main.7479a953.js",
+    "main.css": "/testShop/static/css/main.57610c9e.css",
+    "main.js": "/testShop/static/js/main.c811a50f.js",
     "static/js/787.036f96f3.chunk.js": "/testShop/static/js/787.036f96f3.chunk.js",
     "static/media/microwave.jpg": "/testShop/static/media/microwave.de4e561c00600eb0a947.jpg",
     "static/media/printer.jpg": "/testShop/static/media/printer.30b8f64fc0832825a653.jpg",
@@ -12,12 +12,12 @@
     "static/media/vacuum.jpg": "/testShop/static/media/vacuum.809b7d7648bed864092c.jpg",
     "static/media/fridge.jpg": "/testShop/static/media/fridge.699a15750a7ab82bc8b0.jpg",
     "index.html": "/testShop/index.html",
-    "main.e69b138e.css.map": "/testShop/static/css/main.e69b138e.css.map",
-    "main.7479a953.js.map": "/testShop/static/js/main.7479a953.js.map",
+    "main.57610c9e.css.map": "/testShop/static/css/main.57610c9e.css.map",
+    "main.c811a50f.js.map": "/testShop/static/js/main.c811a50f.js.map",
     "787.036f96f3.chunk.js.map": "/testShop/static/js/787.036f96f3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e69b138e.css",
-    "static/js/main.7479a953.js"
+    "static/css/main.57610c9e.css",
+    "static/js/main.c811a50f.js"
   ]
 }
