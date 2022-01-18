@@ -1,27 +1,26 @@
 import { FC } from 'react';
 
+import { Button, TextField } from '@mui/material';
+import Paper from '@mui/material/Paper';
+
 import styles from './Order.module.scss';
 
 export const Order: FC = () => (
-  <div className={styles.orderBox}>
+  <Paper className={styles.orderBox}>
     <div className={styles.orderTitle}>
-      <b>Имя: </b>
-      <input type="text" placeholder="Введите имя" />
+      <TextField label="Введите имя" variant="outlined" />
     </div>
     <div className={styles.orderTitle}>
-      <b>Фамилия: </b>
-      <input type="text" placeholder="Введите фамилию" />
+      <TextField label="Введите фамилию" variant="outlined" />
     </div>
     <div className={styles.orderTitle}>
-      <b>Адресс: </b>
-      <input type="text" placeholder="Введите адресс" />
+      <TextField label="Введите адресс" variant="outlined" />
     </div>
     <div className={styles.orderTitle}>
-      <b>Телефон: </b>
-      <input type="text" placeholder="Введите телефон" />
+      <TextField label="Введите телефон" variant="outlined" />
     </div>
-    <button className={styles.orderButton} type="button">
+    <Button variant="contained" className={styles.orderButton} type="button">
       Заказать
-    </button>
-  </div>
+    </Button>
+  </Paper>
 );

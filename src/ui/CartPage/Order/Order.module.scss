@@ -1,9 +1,10 @@
 .orderBox {
+  width: 300px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 200px;
-  border: 1px solid black;
+  margin: 20px;
 
   .orderTitle {
     display: flex;
@@ -12,6 +13,7 @@
   }
 
   .orderButton {
+    margin-top: 40px;
     width: 100px;
   }
 }

@@ -1,43 +1,29 @@
 import { FC } from 'react';
 
-import { Grid, Paper } from '@mui/material';
+import { Grid } from '@mui/material';
+
+import styles from './CartPage.module.scss';
+import { Order } from './Order/Order';
 
 import { ProductsType } from 'bll/cartReducer';
-import styles from 'ui/CartPage/CartPage.module.scss';
+import { CartPageItemsList } from 'ui/CartPage/CartPageItemsList/CartPageItemsList';
 
 type PropsType = {
   decrement: (item: ProductsType) => void;
   inc: (item: ProductsType) => void;
   items: ProductsType[];
+  totalPrice: number;
 };
 
-export const CartPage: FC<PropsType> = ({ inc, decrement, items }) => (
-  <Grid container spacing={3} className={styles.itemsBox}>
-    {/* <div className={styles.itemsBox}> */}
-    {items.map(item => (
-      <Grid item key={item.id}>
-        <Paper>
-          <div key={item.id} className={styles.item}>
-            <img className={styles.img} alt="item-iso" src={item.photo} />
-            <div className={styles.description}>
-              <b>Наименование</b>
-              <span>{item.name}</span>
-              <b>Цена</b>
-              <span>{item.totalPrice}</span>
-              <div className={styles.buttons}>
-                <button type="button" onClick={() => decrement(item)}>
-                  -
-                </button>{' '}
-                {item.itemCount}
-                <button type="button" onClick={() => inc(item)}>
-                  +
-                </button>
-              </div>
-            </div>
-          </div>
-        </Paper>
-      </Grid>
-    ))}
-    {/* </div> */}
+export const CartPage: FC<PropsType> = ({ inc, decrement, items, totalPrice }) => (
+  <Grid container spacing={0} className={styles.gridContainer}>
+    <CartPageItemsList items={items} inc={inc} decrement={decrement} />
+    <div>
+      <Order />
+      <div className={styles.price}>
+        <b>Сумма покупок: </b>
+        {totalPrice}
+      </div>
+    </div>
   </Grid>
 );
