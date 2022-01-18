@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -9,8 +9,6 @@ import { Order } from './Oreder/Order';
 import {
   decrementItemCount,
   deleteItem,
-  getItemsInCart,
-  getTotalPrice,
   incItemCount,
   ProductsType,
 } from 'bll/cartReducer';
@@ -21,15 +19,6 @@ export const CartPageContainer: FC = () => {
   const itemsInCart = useSelector(selectItems);
   const totalPrice = useSelector(selectTotalPriceCount);
 
-  useEffect(() => {
-    const valueAsString = localStorage.getItem('product');
-    if (valueAsString) {
-      const itemsLocal = JSON.parse(valueAsString);
-      dispatch(getItemsInCart(itemsLocal));
-      dispatch(getTotalPrice(totalPrice));
-    }
-  }, []);
-
   const inc = (products: ProductsType): void => {
     dispatch(incItemCount(products));
   };
@@ -39,10 +28,6 @@ export const CartPageContainer: FC = () => {
       dispatch(deleteItem(item.id));
     }
   };
-
-  useEffect(() => {
-    localStorage.setItem('product', JSON.stringify(itemsInCart));
-  }, [itemsInCart]);
 
   return (
     <div className={styles.cartBox}>

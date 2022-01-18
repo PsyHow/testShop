@@ -9,7 +9,6 @@ const initialState = {
       totalPrice: 850,
       photo: 'add url',
       itemCount: 1,
-      isAdded: false,
     },
     {
       id: 2,
@@ -18,7 +17,6 @@ const initialState = {
       totalPrice: 1200,
       photo: 'add url',
       itemCount: 1,
-      isAdded: false,
     },
     {
       id: 3,
@@ -27,7 +25,6 @@ const initialState = {
       totalPrice: 500,
       photo: 'add url',
       itemCount: 1,
-      isAdded: false,
     },
     {
       id: 4,
@@ -36,7 +33,6 @@ const initialState = {
       totalPrice: 240,
       photo: 'add url',
       itemCount: 1,
-      isAdded: false,
     },
     {
       id: 5,
@@ -45,7 +41,6 @@ const initialState = {
       totalPrice: 765,
       photo: 'add url',
       itemCount: 1,
-      isAdded: false,
     },
     {
       id: 6,
@@ -54,7 +49,6 @@ const initialState = {
       price: 24,
       totalPrice: 24,
       itemCount: 1,
-      isAdded: false,
     },
     {
       id: 7,
@@ -63,7 +57,6 @@ const initialState = {
       totalPrice: 645,
       photo: 'add url',
       itemCount: 1,
-      isAdded: false,
     },
     {
       id: 8,
@@ -72,7 +65,6 @@ const initialState = {
       totalPrice: 325,
       photo: 'add url',
       itemCount: 1,
-      isAdded: false,
     },
     {
       id: 9,
@@ -81,7 +73,6 @@ const initialState = {
       totalPrice: 923,
       photo: 'add url',
       itemCount: 1,
-      isAdded: false,
     },
     {
       id: 10,
@@ -90,25 +81,14 @@ const initialState = {
       totalPrice: 150,
       photo: 'add url',
       itemCount: 1,
-      isAdded: false,
     },
   ],
 };
 
-export const productReducer = (
-  state = initialState,
-  action: ActionTypes,
-): InitialStateType => {
+export const productReducer = (state = initialState, action: any): InitialStateType => {
   switch (action.type) {
-    case 'ITEM_IS_ADDED': {
-      return {
-        ...state,
-        products: state.products.map(product =>
-          product.id === action.item.id
-            ? { ...product, isAdded: !action.item.isAdded }
-            : product,
-        ),
-      };
+    case 'BLA_BLA': {
+      return state;
     }
     default:
       return state;
@@ -121,5 +101,4 @@ export const itemIsAdded = (item: ProductsType) =>
     item,
   } as const);
 
-type ActionTypes = ReturnType<typeof itemIsAdded>;
 type InitialStateType = typeof initialState;

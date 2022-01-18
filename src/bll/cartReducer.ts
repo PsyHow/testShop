@@ -1,33 +1,5 @@
 const initialState = {
-  items: [
-    {
-      id: 1,
-      name: 'Мобильный телефон',
-      price: 850,
-      totalPrice: 850,
-      photo: 'add url',
-      itemCount: 1,
-      isAdded: false,
-    },
-    {
-      id: 2,
-      name: 'Ноутбук',
-      price: 1200,
-      totalPrice: 1200,
-      photo: 'add url',
-      itemCount: 1,
-      isAdded: false,
-    },
-    {
-      id: 3,
-      name: 'Смарт-часы',
-      price: 500,
-      totalPrice: 500,
-      photo: 'add url',
-      itemCount: 1,
-      isAdded: false,
-    },
-  ] as ProductsType[],
+  items: [] as ProductsType[],
   itemCount: 0,
   totalPriceCount: 0,
 };
@@ -141,7 +113,6 @@ export type ProductsType = {
   photo: string;
   itemCount: number;
   totalPrice: number;
-  isAdded: boolean;
 };
 
 export type InitialStateType = typeof initialState;
