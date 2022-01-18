@@ -1,15 +1,23 @@
 {
   "files": {
-    "main.css": "/testShop/static/css/main.06bc5ebf.css",
-    "main.js": "/testShop/static/js/main.3f078fe7.js",
+    "main.css": "/testShop/static/css/main.27f6e404.css",
+    "main.js": "/testShop/static/js/main.2ea4f89e.js",
     "static/js/787.036f96f3.chunk.js": "/testShop/static/js/787.036f96f3.chunk.js",
+    "static/media/microwave.jpg": "/testShop/static/media/microwave.de4e561c00600eb0a947.jpg",
+    "static/media/printer.jpg": "/testShop/static/media/printer.30b8f64fc0832825a653.jpg",
+    "static/media/desktop.jpg": "/testShop/static/media/desktop.50717725736be7e208cd.jpg",
+    "static/media/tv.jpg": "/testShop/static/media/tv.e3a1c659ce87cdde897e.jpg",
+    "static/media/charger.jpg": "/testShop/static/media/charger.cf42154ebae998ac8aa1.jpg",
+    "static/media/SmartWatch.jpg": "/testShop/static/media/SmartWatch.2b84acb4840655b5a1b7.jpg",
+    "static/media/vacuum.jpg": "/testShop/static/media/vacuum.809b7d7648bed864092c.jpg",
+    "static/media/fridge.jpg": "/testShop/static/media/fridge.699a15750a7ab82bc8b0.jpg",
     "index.html": "/testShop/index.html",
-    "main.06bc5ebf.css.map": "/testShop/static/css/main.06bc5ebf.css.map",
-    "main.3f078fe7.js.map": "/testShop/static/js/main.3f078fe7.js.map",
+    "main.27f6e404.css.map": "/testShop/static/css/main.27f6e404.css.map",
+    "main.2ea4f89e.js.map": "/testShop/static/js/main.2ea4f89e.js.map",
     "787.036f96f3.chunk.js.map": "/testShop/static/js/787.036f96f3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.06bc5ebf.css",
-    "static/js/main.3f078fe7.js"
+    "static/css/main.27f6e404.css",
+    "static/js/main.2ea4f89e.js"
   ]
 }
