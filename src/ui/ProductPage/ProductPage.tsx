@@ -18,20 +18,19 @@ export const ProductPage: FC<PropsType> = ({ products, itemsInCart, addItemHandl
   <Grid container spacing={3} className={styles.gridContainer}>
     {products.map(item => (
       <Grid item key={item.id}>
-        <Paper className={styles.paperBox}>
+        <Paper className={styles.paperBox} elevation={3}>
           <div className={styles.item} key={item.id}>
             <div>
-              {/* eslint-disable-next-line jsx-a11y/img-redundant-alt */}
-              <img className={styles.itemPhoto} alt="item Photo" src={item.photo} />
+              <img className={styles.itemPhoto} alt="item-iso" src={item.photo} />
             </div>
             <b>Наименование: </b>
             <span>{item.name}</span>
             <b>Цена: </b>
             <span>{item.price} USD</span>
             <div className={styles.buttonBox}>
-              {itemsInCart.find(f => f.id === item.id) ? (
+              {itemsInCart.find(el => el.id === item.id) ? (
                 <Link className={styles.link} to={PATH.CART_PAGE}>
-                  <Button variant="outlined">В корзину</Button>
+                  <Button variant="contained">Перейти в корзину</Button>
                 </Link>
               ) : (
                 <Button

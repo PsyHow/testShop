@@ -3,6 +3,12 @@ import { FC } from 'react';
 import { ProductsType } from 'bll/cartReducer';
 import styles from 'ui/CartPage/CartPage.module.scss';
 
+type PropsType = {
+  decrement: (item: ProductsType) => void;
+  inc: (item: ProductsType) => void;
+  items: ProductsType[];
+};
+
 export const CartPage: FC<PropsType> = ({ inc, decrement, items }) => (
   <div className={styles.itemsBox}>
     {items.map(item => (
@@ -22,9 +28,3 @@ export const CartPage: FC<PropsType> = ({ inc, decrement, items }) => (
     ))}
   </div>
 );
-
-type PropsType = {
-  decrement: (item: ProductsType) => void;
-  inc: (item: ProductsType) => void;
-  items: ProductsType[];
-};

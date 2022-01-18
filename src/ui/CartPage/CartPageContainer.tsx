@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { CartPage } from './CartPage';
 import styles from './CartPage.module.scss';
-import { Order } from './Oreder/Order';
+import { Order } from './Order/Order';
 
 import {
   decrementItemCount,
@@ -31,8 +31,8 @@ export const CartPageContainer: FC = () => {
 
   return (
     <div className={styles.cartBox}>
-      <Order />
       <CartPage inc={inc} items={itemsInCart} decrement={decrement} />
+      <Order />
       <div>
         <b>Сумма покупок: </b>
         {totalPrice}

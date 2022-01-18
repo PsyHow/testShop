@@ -8,11 +8,14 @@
     .item {
       display: flex;
       flex-direction: column;
+      width: 300px;
 
       .itemPhoto {
-        background-position: center;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%;
         height: 200px;
-        width: 100%;
       }
 
       & span {
