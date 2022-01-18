@@ -1,44 +1,51 @@
 import { FC } from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { Button, Grid, Paper } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 import styles from './ProductPage.module.scss';
 
-import { addItemInCart, ProductsType } from 'bll/cartReducer';
-import { itemIsAdded } from 'bll/productReducer';
-import { selectItems, selectItemsForProductPage } from 'selectors/selectors';
+import { ProductsType } from 'bll/cartReducer';
+import { PATH } from 'constants/constants';
 
-export const ProductPage: FC = () => {
-  const dispatch = useDispatch();
-  const products = useSelector(selectItemsForProductPage);
-  const itemsInCart = useSelector(selectItems);
-
-  const addItemHandle = (item: ProductsType): void => {
-    const productItems = JSON.parse(localStorage.getItem('product') || '[]');
-    productItems.push(item);
-    localStorage.setItem('product', JSON.stringify(productItems));
-    dispatch(addItemInCart(item));
-    dispatch(itemIsAdded(item));
-  };
-
-  return (
-    <div className={styles.productBox}>
-      {products.map(item => (
-        <div key={item.id} className={styles.productItem}>
-          <div className={styles.productPhoto}>{item.photo}</div>
-          <b>Наименование: </b>
-          <span>{item.name}</span>
-          <b>Цена: </b>
-          <span>{item.price}</span>
-          <button
-            onClick={() => addItemHandle(item)}
-            type="button"
-            disabled={!!itemsInCart.find(f => f.id === item.id)}
-          >
-            Добавить в корзину
-          </button>
-        </div>
-      ))}
-    </div>
-  );
+type PropsType = {
+  products: ProductsType[];
+  addItemHandle: (item: ProductsType) => void;
+  itemsInCart: ProductsType[];
 };
+
+export const ProductPage: FC<PropsType> = ({ products, itemsInCart, addItemHandle }) => (
+  <Grid container spacing={3} className={styles.gridContainer}>
+    {products.map(item => (
+      <Grid item key={item.id}>
+        <Paper className={styles.paperBox}>
+          <div className={styles.item} key={item.id}>
+            <div>
+              {/* eslint-disable-next-line jsx-a11y/img-redundant-alt */}
+              <img className={styles.itemPhoto} alt="item Photo" src={item.photo} />
+            </div>
+            <b>Наименование: </b>
+            <span>{item.name}</span>
+            <b>Цена: </b>
+            <span>{item.price} USD</span>
+            <div className={styles.buttonBox}>
+              {itemsInCart.find(f => f.id === item.id) ? (
+                <Link className={styles.link} to={PATH.CART_PAGE}>
+                  <Button variant="outlined">В корзину</Button>
+                </Link>
+              ) : (
+                <Button
+                  variant="outlined"
+                  onClick={() => addItemHandle(item)}
+                  type="button"
+                >
+                  Добавить в корзину
+                </Button>
+              )}
+            </div>
+          </div>
+        </Paper>
+      </Grid>
+    ))}
+  </Grid>
+);

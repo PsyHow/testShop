@@ -1,13 +1,20 @@
-.header {
-  height: 50px;
-  background-color: #0a9297;
+.headerBox {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+
+  & div {
+    color:black;
+  }
 
   & a {
     text-decoration: none;
+    color: black;
+  }
+
+  .cartBox {
     display: flex;
-    flex-direction: column;
-    align-items: end;
+    flex-direction: row;
+    align-items: center;
   }
 }

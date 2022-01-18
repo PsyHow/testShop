@@ -1,3 +1,14 @@
+import Phone from '../assets/100027415722b0.jpg';
+import Charger from '../assets/charger.jpg';
+import Desktop from '../assets/desktop.jpg';
+import Fridge from '../assets/fridge.jpg';
+import Laptop from '../assets/laptop.jpg';
+import Microwave from '../assets/microwave.jpg';
+import Printer from '../assets/printer.jpg';
+import SmartWatch from '../assets/SmartWatch.jpg';
+import TV from '../assets/tv.jpg';
+import Vacuum from '../assets/vacuum.jpg';
+
 import { ProductsType } from 'bll/cartReducer';
 
 const initialState = {
@@ -7,7 +18,7 @@ const initialState = {
       name: 'Мобильный телефон',
       price: 850,
       totalPrice: 850,
-      photo: 'add url',
+      photo: Phone,
       itemCount: 1,
     },
     {
@@ -15,7 +26,7 @@ const initialState = {
       name: 'Ноутбук',
       price: 1200,
       totalPrice: 1200,
-      photo: 'add url',
+      photo: Laptop,
       itemCount: 1,
     },
     {
@@ -23,7 +34,7 @@ const initialState = {
       name: 'Смарт-часы',
       price: 500,
       totalPrice: 500,
-      photo: 'add url',
+      photo: SmartWatch,
       itemCount: 1,
     },
     {
@@ -31,7 +42,7 @@ const initialState = {
       name: 'Принтер',
       price: 240,
       totalPrice: 240,
-      photo: 'add url',
+      photo: Printer,
       itemCount: 1,
     },
     {
@@ -39,15 +50,15 @@ const initialState = {
       name: 'Комьютер',
       price: 765,
       totalPrice: 765,
-      photo: 'add url',
+      photo: Desktop,
       itemCount: 1,
     },
     {
       id: 6,
       name: 'Зарядное устройство',
-      photo: 'add url',
       price: 24,
       totalPrice: 24,
+      photo: Charger,
       itemCount: 1,
     },
     {
@@ -55,7 +66,7 @@ const initialState = {
       name: 'Телевизор',
       price: 645,
       totalPrice: 645,
-      photo: 'add url',
+      photo: TV,
       itemCount: 1,
     },
     {
@@ -63,7 +74,7 @@ const initialState = {
       name: 'Микроволновая печь',
       price: 325,
       totalPrice: 325,
-      photo: 'add url',
+      photo: Microwave,
       itemCount: 1,
     },
     {
@@ -71,7 +82,7 @@ const initialState = {
       name: 'Холодильник',
       price: 923,
       totalPrice: 923,
-      photo: 'add url',
+      photo: Fridge,
       itemCount: 1,
     },
     {
@@ -79,7 +90,7 @@ const initialState = {
       name: 'Пылесос',
       price: 150,
       totalPrice: 150,
-      photo: 'add url',
+      photo: Vacuum,
       itemCount: 1,
     },
   ],

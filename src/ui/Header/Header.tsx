@@ -1,5 +1,8 @@
 import { FC } from 'react';
 
+import LocalMallIcon from '@mui/icons-material/LocalMall';
+import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
+import { AppBar, Button, Toolbar } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -12,17 +15,32 @@ export const Header: FC = () => {
   const totalPrice = useSelector(selectTotalPriceCount);
 
   return (
-    <div className={styles.header}>
-      <Link to={PATH.CART_PAGE}>CART</Link>
-      <Link to={PATH.PRODUCT_PAGE}>Main</Link>
-      {totalPrice ? (
+    <AppBar position="static">
+      <Toolbar className={styles.headerBox}>
         <div>
-          <b>Total Price: </b>
-          {totalPrice}
+          <Link to={PATH.PRODUCT_PAGE}>
+            <Button color="inherit">Список товаров</Button>
+          </Link>
         </div>
-      ) : (
-        ''
-      )}
-    </div>
+        {totalPrice ? (
+          <div className={styles.cartBox}>
+            <div>
+              <b>Сумма покупок: </b> {totalPrice}
+            </div>
+            <div>
+              <Link to={PATH.CART_PAGE}>
+                <LocalMallIcon fontSize="large" />
+              </Link>
+            </div>
+          </div>
+        ) : (
+          <div>
+            <Link to={PATH.CART_PAGE}>
+              <LocalMallOutlinedIcon fontSize="large" />
+            </Link>
+          </div>
+        )}
+      </Toolbar>
+    </AppBar>
   );
 };

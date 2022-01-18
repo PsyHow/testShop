@@ -1,24 +1,37 @@
-.productBox {
-  margin-top: 40px;
-  display: flex;
-  flex-wrap: wrap;
+.gridContainer {
   justify-content: center;
-  border: 1px solid black;
 
-  .productItem {
-    width: 250px;
+  .paperBox {
     padding: 10px;
-    border: 1px solid gray;
-    display: flex;
-    flex-direction: column;
-    margin: 20px;
+    margin-top: 20px;
 
-    .productPhoto {
-      width: 200px;
-      height: 100px;
-      background-color: bisque;
-      margin: 0 auto;
-      text-align: center;
+    .item {
+      display: flex;
+      flex-direction: column;
+
+      .itemPhoto {
+        background-position: center;
+        height: 200px;
+        width: 100%;
+      }
+
+      & span {
+        padding: 5px;
+      }
+
+      & button {
+        margin-top: 5px;
+        width: 200px;
+      }
+
+      .link {
+        text-decoration: none;
+      }
+
+      .buttonBox {
+        display: flex;
+        justify-content: center;
+      }
     }
   }
 }

@@ -7,12 +7,14 @@ import { getItemsInCart, getTotalPrice } from 'bll/cartReducer';
 import { selectItems, selectTotalPriceCount } from 'selectors/selectors';
 import { CartPageContainer } from 'ui/CartPage/CartPageContainer';
 import { Header } from 'ui/Header/Header';
-import { ProductPage } from 'ui/ProductPage/ProductPage';
+import { ProductPageContainer } from 'ui/ProductPage/ProductPage.container';
+import 'App.css';
 
 const App = (): ReactElement => {
   const dispatch = useDispatch();
   const totalPrice = useSelector(selectTotalPriceCount);
   const itemsInCart = useSelector(selectItems);
+
   useEffect(() => {
     const valueAsString = localStorage.getItem('product');
     if (valueAsString) {
@@ -27,13 +29,13 @@ const App = (): ReactElement => {
   }, [itemsInCart]);
 
   return (
-    <>
+    <div className="app">
       <Header />
       <Routes>
-        <Route path="/" element={<ProductPage />} />
+        <Route path="/" element={<ProductPageContainer />} />
         <Route path="cartPage" element={<CartPageContainer />} />
       </Routes>
-    </>
+    </div>
   );
 };
 
