@@ -32,7 +32,7 @@ export const CartPageContainer: FC = () => {
   return (
     <div className={styles.cartBox}>
       <CartPage inc={inc} items={itemsInCart} decrement={decrement} />
-      <Order />
+      {/* <Order /> */}
       <div>
         <b>Сумма покупок: </b>
         {totalPrice}
