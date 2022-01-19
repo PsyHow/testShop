@@ -1,11 +1,15 @@
-import { child, get } from 'firebase/database';
+import { child, get, ref, set } from 'firebase/database';
 import { Dispatch } from 'redux';
 
 import { ProductsType } from 'bll/cartReducer';
-import { dbRef } from 'testFirebase/base';
+import { AppRootStateType } from 'bll/store';
+import { db, dbRef } from 'testFirebase/base';
+import { FormValuesType } from 'ui/CartPage/Order/OrderFormik';
 
 const initialState = {
   products: [] as ProductsType[],
+  status: 'succeeded' as RequestStatusType,
+  error: null as string | null,
 };
 
 export const productReducer = (
@@ -19,6 +23,18 @@ export const productReducer = (
         products: action.items,
       };
     }
+    case 'SET_APP_STATUS': {
+      return {
+        ...state,
+        status: action.status,
+      };
+    }
+    case 'SET_APP_ERROR': {
+      return {
+        ...state,
+        error: action.error,
+      };
+    }
     default:
       return state;
   }
@@ -30,21 +46,53 @@ export const getProductItem = (items: ProductsType[]) =>
     items,
   } as const);
 
+export const setAppStatus = (status: RequestStatusType) =>
+  ({
+    type: 'SET_APP_STATUS',
+    status,
+  } as const);
+
+export const setAppError = (error: string | null) =>
+  ({
+    type: 'SET_APP_ERROR',
+    error,
+  } as const);
+
 // thunk
 export const fetchProductItems = () => (dispatch: Dispatch) => {
+  dispatch(setAppStatus('loading'));
   get(child(dbRef, `products`))
     .then(snapshot => {
       if (snapshot.exists()) {
+        dispatch(setAppStatus('succeeded'));
         dispatch(getProductItem(snapshot.val()));
-      } else {
-        console.log('No data available');
       }
     })
-    .catch(error => {
-      console.error(error);
+    .catch(() => {
+      dispatch(setAppError('Connection Error'));
     });
 };
 
+export const setOrderTC =
+  (data: FormValuesType) => (dispatch: Dispatch, getState: () => AppRootStateType) => {
+    const state = getState();
+    const { items } = state.cartReducer;
+    dispatch(setAppStatus('loading'));
+    set(ref(db, 'order/'), { data, items })
+      .then(() => {
+        dispatch(setAppStatus('succeeded'));
+        dispatch(setAppError('Data saved successfully!'));
+      })
+      .catch(() => {
+        dispatch(setAppError('Connection Error'));
+      });
+  };
+
 type InitialStateType = typeof initialState;
 
-type ActionsType = ReturnType<typeof getProductItem>;
+type ActionsType =
+  | ReturnType<typeof getProductItem>
+  | ReturnType<typeof setAppStatus>
+  | ReturnType<typeof setAppError>;
+
+export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed';
