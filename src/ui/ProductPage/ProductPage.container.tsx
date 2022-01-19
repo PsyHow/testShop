@@ -1,9 +1,9 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
 import { addItemInCart, ProductsType } from 'bll/cartReducer';
-import { itemIsAdded } from 'bll/productReducer';
+import { fetchProductItems } from 'bll/productReducer';
 import { selectItems, selectItemsForProductPage } from 'selectors/selectors';
 import { ProductPage } from 'ui/ProductPage/ProductPage';
 
@@ -17,8 +17,11 @@ export const ProductPageContainer: FC = () => {
     productItems.push(item);
     localStorage.setItem('product', JSON.stringify(productItems));
     dispatch(addItemInCart(item));
-    dispatch(itemIsAdded(item));
   };
+
+  useEffect(() => {
+    dispatch(fetchProductItems());
+  }, []);
 
   return (
     <ProductPage

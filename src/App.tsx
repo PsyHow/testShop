@@ -6,14 +6,17 @@ import { Route, Routes } from 'react-router-dom';
 import { getItemsInCart, getTotalPrice } from 'bll/cartReducer';
 import { PATH } from 'constants/constants';
 import { selectItems, selectTotalPriceCount } from 'selectors/selectors';
+import { charger, imagesRef } from "testFirebase/baseStorage";
 import { CartPageContainer } from 'ui/CartPage/CartPageContainer';
 import { Header } from 'ui/Header/Header';
 import { ProductPageContainer } from 'ui/ProductPage/ProductPage.container';
+
 import 'App.css';
 
 const App = (): ReactElement => {
   const dispatch = useDispatch();
   const totalPrice = useSelector(selectTotalPriceCount);
+
   const itemsInCart = useSelector(selectItems);
 
   useEffect(() => {
@@ -24,10 +27,11 @@ const App = (): ReactElement => {
       dispatch(getTotalPrice(totalPrice));
     }
   }, []);
-
   useEffect(() => {
     localStorage.setItem('product', JSON.stringify(itemsInCart));
   }, [itemsInCart]);
+
+  console.log(charger);
 
   return (
     <div className="app">
