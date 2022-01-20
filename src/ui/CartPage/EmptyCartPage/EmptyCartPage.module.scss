@@ -1,0 +1,14 @@
+.cartBox {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & a {
+    text-decoration: none;
+  }
+
+  & button {
+    margin-top: 20px;
+  }
+}

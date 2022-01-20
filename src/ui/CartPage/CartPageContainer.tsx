@@ -10,12 +10,11 @@ import {
   incItemCount,
   ProductsType,
 } from 'bll/cartReducer';
-import { selectItems, selectTotalPriceCount } from 'selectors/selectors';
+import { selectItems } from 'selectors/selectors';
 
 export const CartPageContainer: FC = () => {
   const dispatch = useDispatch();
   const itemsInCart = useSelector(selectItems);
-  const totalPrice = useSelector(selectTotalPriceCount);
 
   const increaseProductQuantity = (products: ProductsType): void => {
     dispatch(incItemCount(products));
@@ -33,7 +32,6 @@ export const CartPageContainer: FC = () => {
       increaseProductQuantity={increaseProductQuantity}
       items={itemsInCart}
       decreaseProductQuantity={decreaseProductQuantity}
-      totalPrice={totalPrice}
     />
   );
 };
