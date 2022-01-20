@@ -23,8 +23,8 @@ const App = (): ReactElement => {
     const valueAsString = localStorage.getItem('product');
     if (valueAsString) {
       const itemsLocal = JSON.parse(valueAsString);
-      dispatch(getItemsInCart(itemsLocal));
-      dispatch(getTotalPrice(totalPrice));
+      dispatch(getItemsInCart({ items: itemsLocal }));
+      dispatch(getTotalPrice({ totalPrice }));
     }
   }, []);
   useEffect(() => {

@@ -7,7 +7,7 @@ export const selectItems = (state: AppRootStateType): ProductsType[] =>
 export const selectTotalPriceCount = (state: AppRootStateType): number =>
   state.cartReducer.totalPriceCount;
 export const selectItemsForProductPage = (state: AppRootStateType): ProductsType[] =>
-  state.productReducer;
+  state.productReducer.items;
 export const selectAppStatus = (state: AppRootStateType): RequestStatusType =>
   state.appReducer.status;
 export const selectError = (state: AppRootStateType): string | null =>

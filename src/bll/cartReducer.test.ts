@@ -39,7 +39,7 @@ beforeEach(() => {
 });
 
 test('item should be remove', () => {
-  const action = deleteItem(1);
+  const action = deleteItem({ id: 1 });
 
   const endState = cartReducer(startState, action);
 
@@ -57,12 +57,14 @@ test('item should be remove', () => {
 
 test('item should be added', () => {
   const action = addItemInCart({
-    id: 3,
-    name: 'Наушники',
-    price: 230,
-    totalPrice: 230,
-    photo: 'add url',
-    itemCount: 1,
+    item: {
+      id: 3,
+      name: 'Наушники',
+      price: 230,
+      totalPrice: 230,
+      photo: 'add url',
+      itemCount: 1,
+    },
   });
 
   const endState = cartReducer(startState, action);
@@ -74,7 +76,7 @@ test('item should be added', () => {
 });
 
 test('increment item count should be correct', () => {
-  const action = incItemCount(startState.items[0]);
+  const action = incItemCount({ item: startState.items[0] });
 
   const endState = cartReducer(startState, action);
 
@@ -86,7 +88,7 @@ test('increment item count should be correct', () => {
 });
 
 test('decrement item count should be correct', () => {
-  const action = decrementItemCount(startState.items[0]);
+  const action = decrementItemCount({ item: startState.items[0] });
 
   const endState = cartReducer(startState, action);
 
@@ -110,7 +112,7 @@ test('items should be get', () => {
   items.push(item);
   localStorage.setItem('product', JSON.stringify(items));
 
-  const action = getItemsInCart(items);
+  const action = getItemsInCart({ items });
 
   const endState = cartReducer(startState, action);
 

@@ -16,7 +16,7 @@ export const ProductPageContainer: FC = () => {
     const productItems = JSON.parse(localStorage.getItem('product') || '[]');
     productItems.push(item);
     localStorage.setItem('product', JSON.stringify(productItems));
-    dispatch(addItemInCart(item));
+    dispatch(addItemInCart({ item }));
   };
 
   useEffect(() => {

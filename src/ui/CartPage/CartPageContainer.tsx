@@ -17,13 +17,13 @@ export const CartPageContainer: FC = () => {
   const itemsInCart = useSelector(selectItems);
 
   const increaseProductQuantity = (item: ProductsType): void => {
-    dispatch(incItemCount(item));
+    dispatch(incItemCount({ item }));
   };
 
   const decreaseProductQuantity = (item: ProductsType): void => {
-    dispatch(decrementItemCount(item));
+    dispatch(decrementItemCount({ item }));
     if (item.itemCount <= 1) {
-      dispatch(deleteItem(item.id));
+      dispatch(deleteItem({ id: item.id }));
     }
   };
 

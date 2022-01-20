@@ -1,37 +1,41 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { child, get } from 'firebase/database';
-import { Dispatch } from 'redux';
 
 import { setAppError, setAppStatus } from 'bll/appReducer/appReducer';
 import { ProductsType } from 'bll/cartReducer';
 import { dbRef } from 'testFirebase/base';
 
+export const fetchProductItems = createAsyncThunk(
+  'products/fetchProductsItems',
+  async (param, { dispatch, rejectWithValue }) => {
+    dispatch(setAppStatus({ status: 'loading' }));
+    const res = await get(child(dbRef, `products`));
+    try {
+      dispatch(setAppStatus({ status: 'succeeded' }));
+      return { items: res.val() };
+    } catch (error) {
+      dispatch(setAppError({ error: 'Connection Error' }));
+      return rejectWithValue(null);
+    }
+  },
+);
+
 const slice = createSlice({
   name: 'products',
-  initialState: [] as InitialStateType,
-  reducers: {
-    getProductItems(state, action: PayloadAction<{ items: ProductsType[] }>) {
-      return action.payload.items.map(products => ({ ...products }));
-    },
+  initialState: {
+    items: [],
+  } as InitialStateType,
+  reducers: {},
+  extraReducers: builder => {
+    builder.addCase(fetchProductItems.fulfilled, (state, action) => {
+      // eslint-disable-next-line no-param-reassign
+      state.items = action.payload.items;
+    });
   },
 });
 
-export const { getProductItems } = slice.actions;
 export const productReducer = slice.reducer;
 
-// thunk
-export const fetchProductItems = () => (dispatch: Dispatch) => {
-  dispatch(setAppStatus({ status: 'loading' }));
-  get(child(dbRef, `products`))
-    .then(snapshot => {
-      if (snapshot.exists()) {
-        dispatch(setAppStatus({ status: 'succeeded' }));
-        dispatch(getProductItems({ items: snapshot.val() }));
-      }
-    })
-    .catch(() => {
-      dispatch(setAppError({ error: 'Connection Error' }));
-    });
+type InitialStateType = {
+  items: ProductsType[];
 };
-
-type InitialStateType = ProductsType[];
