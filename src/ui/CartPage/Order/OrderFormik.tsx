@@ -4,13 +4,18 @@ import { TextField } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
+import * as yup from 'yup';
 
+import { getItemsInCart, getTotalPrice } from 'bll/cartReducer';
 import { setOrderTC } from 'bll/productReducer';
 import styles from 'ui/CartPage/Order/OrderFormik.module.scss';
 import { ModalComponent } from 'ui/common/ModalComponent';
 
 export const OrderFormik: FC = () => {
   const dispatch = useDispatch();
+
+  const phoneRegExp =
+    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
   const formik = useFormik({
     initialValues: {
@@ -20,25 +25,26 @@ export const OrderFormik: FC = () => {
       address: '',
       phone: '',
     },
-    validate: values => {
-      const errors: Partial<FormValuesType> = {};
-      if (!values.name) {
-        errors.name = 'Required';
-      }
-      if (!values.lastName) {
-        errors.lastName = 'Required';
-      }
-      if (!values.address) {
-        errors.address = 'Required';
-      }
-      if (!values.phone) {
-        errors.phone = 'Required';
-      }
-      return errors;
-    },
+    validationSchema: yup.object().shape({
+      name: yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
+      lastName: yup
+        .string()
+        .min(2, 'Too Short!')
+        .max(50, 'Too Long!')
+        .required('Required'),
+      address: yup
+        .string()
+        .min(2, 'Too Short!')
+        .max(50, 'Too Long!')
+        .required('Required'),
+      phone: yup.string().matches(phoneRegExp, 'Phone number is not valid'),
+    }),
     onSubmit: values => {
       formik.resetForm();
       dispatch(setOrderTC(values));
+      localStorage.clear();
+      dispatch(getItemsInCart([]));
+      dispatch(getTotalPrice(0));
     },
   });
 
@@ -46,7 +52,7 @@ export const OrderFormik: FC = () => {
 
   return (
     <div className={styles.formikContainer}>
-      <form id="formId" onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit}>
         <Paper className={styles.orderBox}>
           <div className={styles.orderTitle}>
             <TextField
@@ -92,7 +98,11 @@ export const OrderFormik: FC = () => {
               <div style={{ color: 'red' }}>{formik.errors.phone}</div>
             ) : null}
           </div>
-          <ModalComponent disabled={disabled} userName={formik.values.name} />
+          <ModalComponent
+            disabled={disabled}
+            userName={formik.values.name}
+            submit={formik.submitForm}
+          />
         </Paper>
       </form>
     </div>

@@ -81,7 +81,6 @@ export const setOrderTC =
     set(ref(db, 'order/'), { data, items })
       .then(() => {
         dispatch(setAppStatus('succeeded'));
-        dispatch(setAppError('Data saved successfully!'));
       })
       .catch(() => {
         dispatch(setAppError('Connection Error'));

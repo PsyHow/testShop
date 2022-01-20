@@ -9,7 +9,11 @@ import {
   InitialStateType,
 } from 'bll/cartReducer';
 
-let startState: InitialStateType = { items: [], itemCount: 0, totalPriceCount: 0 };
+let startState: InitialStateType = {
+  items: [],
+  itemCount: 0,
+  totalPriceCount: 0,
+};
 beforeEach(() => {
   startState = {
     items: [

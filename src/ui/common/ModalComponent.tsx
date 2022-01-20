@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import * as React from 'react';
 
 import { Box, Button, Modal, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
@@ -27,14 +28,18 @@ const style = {
 type PropsType = {
   disabled: boolean;
   userName: string;
+  submit: () => void;
 };
 
-export const ModalComponent: FC<PropsType> = ({ disabled, userName }) => {
+export const ModalComponent: FC<PropsType> = ({ disabled, userName, submit }) => {
   const totalPrice = useSelector(selectTotalPriceCount);
 
   const [open, setOpen] = useState(false);
   const handleOpen = (): void => setOpen(true);
-  const handleClose = (): void => setOpen(false);
+  const handleClose = (): void => {
+    submit();
+    setOpen(false);
+  };
   return (
     <>
       <Button disabled={disabled} variant="contained" onClick={handleOpen}>
@@ -57,10 +62,9 @@ export const ModalComponent: FC<PropsType> = ({ disabled, userName }) => {
           >
             Сумма вашего заказа: {totalPrice} USD
             <Button
+              type="submit"
               variant="contained"
               className={styles.button}
-              type="submit"
-              form="formId"
               onClick={handleClose}
             >
               Подтвердить заказ

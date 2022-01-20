@@ -10,14 +10,13 @@ import { selectAppStatus, selectItems, selectTotalPriceCount } from 'selectors/s
 import { CartPageContainer } from 'ui/CartPage/CartPageContainer';
 import { ErrorSnackbar } from 'ui/common/ErrorSnackBar';
 import { Header } from 'ui/Header/Header';
-import { ProductPageContainer } from 'ui/ProductPage/ProductPage.container';
+import { ProductPageContainer } from 'ui/ProductPage/ProductPageContainer';
 import 'App.css';
 
 const App = (): ReactElement => {
   const dispatch = useDispatch();
   const totalPrice = useSelector(selectTotalPriceCount);
   const status = useSelector(selectAppStatus);
-
   const itemsInCart = useSelector(selectItems);
 
   useEffect(() => {
