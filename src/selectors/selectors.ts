@@ -1,5 +1,5 @@
+import { RequestStatusType } from 'bll/appReducer/appReducer';
 import { ProductsType } from 'bll/cartReducer';
-import { RequestStatusType } from 'bll/productReducer';
 import { AppRootStateType } from 'bll/store';
 
 export const selectItems = (state: AppRootStateType): ProductsType[] =>
@@ -9,6 +9,6 @@ export const selectTotalPriceCount = (state: AppRootStateType): number =>
 export const selectItemsForProductPage = (state: AppRootStateType): ProductsType[] =>
   state.productReducer.products;
 export const selectAppStatus = (state: AppRootStateType): RequestStatusType =>
-  state.productReducer.status;
+  state.appReducer.status;
 export const selectError = (state: AppRootStateType): string | null =>
-  state.productReducer.error;
+  state.appReducer.error;

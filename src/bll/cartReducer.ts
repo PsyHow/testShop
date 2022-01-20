@@ -1,3 +1,10 @@
+import { ref, set } from 'firebase/database';
+
+import { setAppError, setAppStatus } from 'bll/appReducer/appReducer';
+import { AppRootStateType, AppThunkType } from 'bll/store';
+import { db } from 'testFirebase/base';
+import { FormValuesType } from 'ui/CartPage/Order/OrderFormik';
+
 const initialState = {
   items: [] as ProductsType[],
   itemCount: 0,
@@ -6,7 +13,7 @@ const initialState = {
 
 export const cartReducer = (
   state = initialState,
-  action: ActionsType,
+  action: CartActionTypes,
 ): InitialStateType => {
   switch (action.type) {
     case 'INC_ITEM_COUNT': {
@@ -106,6 +113,20 @@ export const getTotalPrice = (totalPrice: number) =>
     totalPrice,
   } as const);
 
+export const setOrderTC =
+  (data: FormValuesType): AppThunkType =>
+  (dispatch, getState: () => AppRootStateType) => {
+    const { items } = getState().cartReducer;
+    dispatch(setAppStatus('loading'));
+    set(ref(db, 'order/'), { data, items })
+      .then(() => {
+        dispatch(setAppStatus('succeeded'));
+      })
+      .catch(() => {
+        dispatch(setAppError('Connection Error'));
+      });
+  };
+
 export type ProductsType = {
   id: number;
   name: string;
@@ -117,7 +138,7 @@ export type ProductsType = {
 
 export type InitialStateType = typeof initialState;
 
-export type ActionsType =
+export type CartActionTypes =
   | ReturnType<typeof incItemCount>
   | ReturnType<typeof addItemInCart>
   | ReturnType<typeof decrementItemCount>

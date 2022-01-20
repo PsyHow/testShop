@@ -6,8 +6,7 @@ import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 
-import { getItemsInCart, getTotalPrice } from 'bll/cartReducer';
-import { setOrderTC } from 'bll/productReducer';
+import { getItemsInCart, getTotalPrice, setOrderTC } from 'bll/cartReducer';
 import styles from 'ui/CartPage/Order/OrderFormik.module.scss';
 import { ModalComponent } from 'ui/common/ModalComponent';
 
@@ -26,15 +25,15 @@ export const OrderFormik: FC = () => {
       phone: '',
     },
     validationSchema: yup.object().shape({
-      name: yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
+      name: yup.string().min(4, 'Too Short!').max(50, 'Too Long!').required('Required'),
       lastName: yup
         .string()
-        .min(2, 'Too Short!')
+        .min(4, 'Too Short!')
         .max(50, 'Too Long!')
         .required('Required'),
       address: yup
         .string()
-        .min(2, 'Too Short!')
+        .min(5, 'Too Short!')
         .max(50, 'Too Long!')
         .required('Required'),
       phone: yup.string().matches(phoneRegExp, 'Phone number is not valid'),

@@ -35,7 +35,7 @@ beforeEach(() => {
       },
     ],
     itemCount: 0,
-    totalPriceCount: 0,
+    totalPriceCount: 2050,
   };
 });
 
@@ -66,13 +66,12 @@ test('item should be added', () => {
     itemCount: 1,
   });
 
-  const testState = { items: [], itemCount: 0, totalPriceCount: 0 };
-
-  const endState = cartReducer(testState, action);
+  const endState = cartReducer(startState, action);
 
   expect(endState.items.length).toBe(3);
   expect(endState.items[2].id).toBe(3);
-  expect(endState.items[0].name).toBe('Наушники');
+  expect(endState.items[2].name).toBe('Наушники');
+  expect(endState.totalPriceCount).toBe(2280);
 });
 
 test('increment item count should be correct', () => {
@@ -84,7 +83,7 @@ test('increment item count should be correct', () => {
   expect(endState.items[0].totalPrice).toBe(1700);
   expect(endState.items[1].itemCount).toBe(1);
   expect(endState.items[1].totalPrice).toBe(1200);
-  expect(endState.totalPriceCount).toBe(850);
+  expect(endState.totalPriceCount).toBe(2900);
 });
 
 test('decrement item count should be correct', () => {
