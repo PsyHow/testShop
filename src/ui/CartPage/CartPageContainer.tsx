@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CartPage } from './CartPage';
 
 import {
-  decrementItemCount,
-  deleteItem,
   incItemCount,
+  deleteItem,
+  decrementItemCount,
   ProductsType,
 } from 'bll/cartReducer';
 import { selectItems } from 'selectors/selectors';
@@ -16,8 +16,8 @@ export const CartPageContainer: FC = () => {
   const dispatch = useDispatch();
   const itemsInCart = useSelector(selectItems);
 
-  const increaseProductQuantity = (products: ProductsType): void => {
-    dispatch(incItemCount(products));
+  const increaseProductQuantity = (item: ProductsType): void => {
+    dispatch(incItemCount(item));
   };
 
   const decreaseProductQuantity = (item: ProductsType): void => {

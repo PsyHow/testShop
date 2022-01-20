@@ -1,51 +1,37 @@
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { child, get } from 'firebase/database';
+import { Dispatch } from 'redux';
 
 import { setAppError, setAppStatus } from 'bll/appReducer/appReducer';
 import { ProductsType } from 'bll/cartReducer';
-import { AppThunkType } from 'bll/store';
 import { dbRef } from 'testFirebase/base';
 
-const initialState = {
-  products: [] as ProductsType[],
-};
+const slice = createSlice({
+  name: 'products',
+  initialState: [] as InitialStateType,
+  reducers: {
+    getProductItems(state, action: PayloadAction<{ items: ProductsType[] }>) {
+      return action.payload.items.map(products => ({ ...products }));
+    },
+  },
+});
 
-export const productReducer = (
-  state = initialState,
-  action: ProductsActionTypes,
-): InitialStateType => {
-  switch (action.type) {
-    case 'GET_PRODUCT_ITEMS': {
-      return {
-        ...state,
-        products: action.items,
-      };
-    }
-    default:
-      return state;
-  }
-};
-
-export const getProductItem = (items: ProductsType[]) =>
-  ({
-    type: 'GET_PRODUCT_ITEMS',
-    items,
-  } as const);
+export const { getProductItems } = slice.actions;
+export const productReducer = slice.reducer;
 
 // thunk
-export const fetchProductItems = (): AppThunkType => dispatch => {
-  dispatch(setAppStatus('loading'));
+export const fetchProductItems = () => (dispatch: Dispatch) => {
+  dispatch(setAppStatus({ status: 'loading' }));
   get(child(dbRef, `products`))
     .then(snapshot => {
       if (snapshot.exists()) {
-        dispatch(setAppStatus('succeeded'));
-        dispatch(getProductItem(snapshot.val()));
+        dispatch(setAppStatus({ status: 'succeeded' }));
+        dispatch(getProductItems({ items: snapshot.val() }));
       }
     })
     .catch(() => {
-      dispatch(setAppError('Connection Error'));
+      dispatch(setAppError({ error: 'Connection Error' }));
     });
 };
 
-type InitialStateType = typeof initialState;
-
-export type ProductsActionTypes = ReturnType<typeof getProductItem>;
+type InitialStateType = ProductsType[];

@@ -1,7 +1,8 @@
 import { ref, set } from 'firebase/database';
+import { Dispatch } from 'redux';
 
 import { setAppError, setAppStatus } from 'bll/appReducer/appReducer';
-import { AppRootStateType, AppThunkType } from 'bll/store';
+import { AppRootStateType } from 'bll/store';
 import { db } from 'testFirebase/base';
 import { FormValuesType } from 'ui/CartPage/Order/OrderFormik';
 
@@ -114,16 +115,15 @@ export const getTotalPrice = (totalPrice: number) =>
   } as const);
 
 export const setOrderTC =
-  (data: FormValuesType): AppThunkType =>
-  (dispatch, getState: () => AppRootStateType) => {
+  (data: FormValuesType) => (dispatch: Dispatch, getState: () => AppRootStateType) => {
     const { items } = getState().cartReducer;
-    dispatch(setAppStatus('loading'));
+    dispatch(setAppStatus({ status: 'loading' }));
     set(ref(db, 'order/'), { data, items })
       .then(() => {
-        dispatch(setAppStatus('succeeded'));
+        dispatch(setAppStatus({ status: 'succeeded' }));
       })
       .catch(() => {
-        dispatch(setAppError('Connection Error'));
+        dispatch(setAppError({ error: 'Connection Error' }));
       });
   };
 

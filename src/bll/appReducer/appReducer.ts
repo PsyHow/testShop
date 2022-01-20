@@ -1,46 +1,30 @@
-const initialState = {
-  status: 'succeeded' as RequestStatusType,
-  error: null as string | null,
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+const slice = createSlice({
+  name: 'app',
+  initialState: {
+    status: 'succeeded',
+    error: null,
+  } as InitialStateType,
+  reducers: {
+    setAppStatus(state, action: PayloadAction<{ status: RequestStatusType }>) {
+      // eslint-disable-next-line no-param-reassign
+      state.status = action.payload.status;
+    },
+    setAppError(state, action: PayloadAction<{ error: string | null }>) {
+      // eslint-disable-next-line no-param-reassign
+      state.error = action.payload.error;
+    },
+  },
+});
+
+export const { setAppStatus, setAppError } = slice.actions;
+
+export const appReducer = slice.reducer;
+
+type InitialStateType = {
+  status: RequestStatusType;
+  error: null | string;
 };
-
-export const appReducer = (
-  state = initialState,
-  action: AppActionTypes,
-): InitialStateType => {
-  switch (action.type) {
-    case 'SET_APP_STATUS': {
-      return {
-        ...state,
-        status: action.status,
-      };
-    }
-    case 'SET_APP_ERROR': {
-      return {
-        ...state,
-        error: action.error,
-      };
-    }
-    default:
-      return state;
-  }
-};
-
-export const setAppStatus = (status: RequestStatusType) =>
-  ({
-    type: 'SET_APP_STATUS',
-    status,
-  } as const);
-
-export const setAppError = (error: string | null) =>
-  ({
-    type: 'SET_APP_ERROR',
-    error,
-  } as const);
-
-export type AppActionTypes =
-  | ReturnType<typeof setAppStatus>
-  | ReturnType<typeof setAppError>;
-
-type InitialStateType = typeof initialState;
 
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed';

@@ -1,26 +1,22 @@
-import { applyMiddleware, combineReducers, createStore } from 'redux';
-import thunk, { ThunkAction } from 'redux-thunk';
+import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers } from 'redux';
+import thunkMiddleware from 'redux-thunk';
 
-import { AppActionTypes, appReducer } from './appReducer/appReducer';
-import { productReducer, ProductsActionTypes } from './productReducer';
+import { appReducer } from './appReducer/appReducer';
+import { productReducer } from './productReducer';
 
-import { CartActionTypes, cartReducer } from 'bll/cartReducer';
+import { cartReducer } from 'bll/cartReducer';
 
-const reducers = combineReducers({
+const rootReducer = combineReducers({
   cartReducer,
   productReducer,
   appReducer,
 });
 
-export const store = createStore(reducers, applyMiddleware(thunk));
+export const store = configureStore({
+  reducer: rootReducer,
+  middleware: getDefaultMiddleware => getDefaultMiddleware().prepend(thunkMiddleware),
+});
 
-export type AppRootStateType = ReturnType<typeof reducers>;
-
-type ReducersActionTypes = AppActionTypes | ProductsActionTypes | CartActionTypes;
-
-export type AppThunkType<ReturnType = void> = ThunkAction<
-  ReturnType,
-  AppRootStateType,
-  unknown,
-  ReducersActionTypes
->;
+type RootReducerType = typeof rootReducer;
+export type AppRootStateType = ReturnType<RootReducerType>;
