@@ -1,4 +1,9 @@
-.gridContainer {
-  column-gap: 100px;
-  justify-content: center;
+.cartPageBox {
+  min-height: 100vh;
+
+  .gridContainer {
+    column-gap: 100px;
+    justify-content: center;
+  }
 }
+

@@ -1,1 +1,1 @@
-export { PATH } from './constants';
+export { PATH, phoneRegExp } from './constants';

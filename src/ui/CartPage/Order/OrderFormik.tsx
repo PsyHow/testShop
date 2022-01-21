@@ -7,14 +7,12 @@ import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 
 import { setOrderTC } from 'bll';
+import { phoneRegExp } from 'const';
 import { ModalComponent } from 'ui';
 import styles from 'ui/CartPage/Order/OrderFormik.module.scss';
 
 export const OrderFormik: FC = () => {
   const dispatch = useDispatch();
-
-  const phoneRegExp =
-    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
   const formik = useFormik({
     initialValues: {
@@ -55,7 +53,6 @@ export const OrderFormik: FC = () => {
             <TextField
               label="Введите Имя"
               variant="outlined"
-              // eslint-disable-next-line react/jsx-props-no-spreading
               {...formik.getFieldProps('name')}
             />
             {formik.touched.name && formik.errors.name ? (
@@ -66,7 +63,6 @@ export const OrderFormik: FC = () => {
             <TextField
               label="Введите Фамилию"
               variant="outlined"
-              // eslint-disable-next-line react/jsx-props-no-spreading
               {...formik.getFieldProps('lastName')}
             />
             {formik.touched.lastName && formik.errors.lastName ? (
@@ -77,7 +73,6 @@ export const OrderFormik: FC = () => {
             <TextField
               label="Введите адресс"
               variant="outlined"
-              // eslint-disable-next-line react/jsx-props-no-spreading
               {...formik.getFieldProps('address')}
             />
             {formik.touched.address && formik.errors.address ? (
@@ -88,7 +83,6 @@ export const OrderFormik: FC = () => {
             <TextField
               label="Введите телефон"
               variant="outlined"
-              // eslint-disable-next-line react/jsx-props-no-spreading
               {...formik.getFieldProps('phone')}
             />
             {formik.touched.phone && formik.errors.phone ? (

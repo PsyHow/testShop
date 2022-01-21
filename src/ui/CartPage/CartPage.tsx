@@ -18,7 +18,7 @@ export const CartPage: FC<PropsType> = ({
   decreaseProductQuantity,
   items,
 }) => (
-  <div style={{ minHeight: '100vh' }}>
+  <div className={styles.cartPageBox}>
     {items.length ? (
       <Grid container spacing={0} className={styles.gridContainer}>
         <CartPageItemsList

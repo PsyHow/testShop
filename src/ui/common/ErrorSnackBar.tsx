@@ -8,7 +8,6 @@ import { setAppError } from 'bll';
 import { selectError } from 'selectors';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>((props, ref) => (
-  // eslint-disable-next-line react/jsx-props-no-spreading
   <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
 ));
 
