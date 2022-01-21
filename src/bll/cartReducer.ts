@@ -34,30 +34,23 @@ const slice = createSlice({
     incItemCount(state, action: PayloadAction<{ item: ProductsType }>) {
       const index = state.items.findIndex(item => item.id === action.payload.item.id);
       if (index > -1) {
-        // eslint-disable-next-line no-param-reassign
         state.items[index].itemCount = action.payload.item.itemCount + 1;
-        // eslint-disable-next-line no-param-reassign
         state.items[index].totalPrice =
           state.items[index].price + action.payload.item.totalPrice;
       }
-      // eslint-disable-next-line no-param-reassign
       state.totalPriceCount += action.payload.item.price;
     },
     decrementItemCount(state, action: PayloadAction<{ item: ProductsType }>) {
       const index = state.items.findIndex(item => item.id === action.payload.item.id);
       if (index > -1) {
-        // eslint-disable-next-line no-param-reassign
         state.items[index].itemCount = action.payload.item.itemCount - 1;
-        // eslint-disable-next-line no-param-reassign
         state.items[index].totalPrice =
           action.payload.item.totalPrice - state.items[index].price;
       }
-      // eslint-disable-next-line no-param-reassign
       state.totalPriceCount -= action.payload.item.price;
     },
     addItemInCart(state, action: PayloadAction<{ item: ProductsType }>) {
       state.items.push(action.payload.item);
-      // eslint-disable-next-line no-param-reassign
       state.totalPriceCount += action.payload.item.price;
     },
     deleteItem(state, action: PayloadAction<{ id: number }>) {
@@ -67,17 +60,14 @@ const slice = createSlice({
       }
     },
     getItemsInCart(state, action: PayloadAction<{ items: ProductsType[] }>) {
-      // eslint-disable-next-line no-param-reassign
       state.items = action.payload.items;
     },
     getTotalPrice(state) {
-      // eslint-disable-next-line no-param-reassign
       state.totalPriceCount = state.items.reduce((acc, item) => acc + item.totalPrice, 0);
     },
   },
   extraReducers: builder => {
     builder.addCase(setOrderTC.fulfilled, (state, action) => {
-      // eslint-disable-next-line no-param-reassign
       state.items = action.payload.items;
     });
   },

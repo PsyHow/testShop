@@ -31,7 +31,6 @@ const slice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder.addCase(fetchProductItems.fulfilled, (state, action) => {
-      // eslint-disable-next-line no-param-reassign
       state.items = action.payload.items;
     });
   },

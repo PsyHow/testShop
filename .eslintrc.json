@@ -32,6 +32,7 @@
     "no-magic-numbers": "off",
     "default-param-last": "off",
     "no-use-before-define": "off",
+    "no-param-reassign": ["warn", { "props": true, "ignorePropertyModificationsFor": ["state"] }],
     "no-multiple-empty-lines": [
       "warn",
       {
@@ -60,8 +61,11 @@
         "allowExpressions": true
       }
     ],
-    "prettier/prettier": ["warn",{
-      "endOfLine": "auto"}
+    "prettier/prettier": [
+      "warn",
+      {
+        "endOfLine": "auto"
+      }
     ],
     "react/prop-types": 0,
     "react/display-name": "off",
