@@ -1,10 +1,11 @@
 import {
   addItemInCart,
   cartReducer,
-  incItemCount,
+  decrementItemCount,
   deleteItem,
   getItemsInCart,
-  decrementItemCount,
+  getTotalPrice,
+  incItemCount,
   InitialStateType,
 } from 'bll/cartReducer';
 
@@ -47,13 +48,13 @@ test('item should be remove', () => {
   expect(endState.items.every(item => item.id !== 1)).toBeTruthy();
 });
 
-// test('total price should be correct', () => {
-//   const action = getTotalPrice({ totalPrice: 0 });
-//
-//   const endState = cartReducer(startState, action);
-//
-//   expect(endState.totalPriceCount).toBe(2050);
-// });
+test('total price should be correct', () => {
+  const action = getTotalPrice();
+
+  const endState = cartReducer(startState, action);
+
+  expect(endState.totalPriceCount).toBe(2050);
+});
 
 test('item should be added', () => {
   const action = addItemInCart({

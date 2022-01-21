@@ -33,7 +33,7 @@
     "default-param-last": "off",
     "no-use-before-define": "off",
     "no-multiple-empty-lines": [
-      "error",
+      "warn",
       {
         "max": 1
       }
@@ -52,10 +52,10 @@
       }
     ],
     "@typescript-eslint/no-use-before-define": [
-      "error"
+      "warn"
     ],
     "@typescript-eslint/explicit-function-return-type": [
-      "error",
+      "warn",
       {
         "allowExpressions": true
       }
@@ -66,7 +66,7 @@
     "react/prop-types": 0,
     "react/display-name": "off",
     "react/react-in-jsx-scope": "off",
-    "react/destructuring-assignment": "error",
+    "react/destructuring-assignment": "warn",
     "react/jsx-filename-extension": [
       1,
       {
@@ -86,7 +86,7 @@
     "import/extensions": "off",
     "import/prefer-default-export": "off",
     "import/order": [
-      "error",
+      "warn",
       {
         "newlines-between": "always",
         "pathGroupsExcludedImportTypes": [

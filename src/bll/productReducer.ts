@@ -11,8 +11,11 @@ export const fetchProductItems = createAsyncThunk(
     dispatch(setAppStatus({ status: 'loading' }));
     const res = await get(child(dbRef, `products`));
     try {
-      dispatch(setAppStatus({ status: 'succeeded' }));
-      return { items: res.val() };
+      if (res.exists()) {
+        dispatch(setAppStatus({ status: 'succeeded' }));
+        return { items: res.val() };
+      }
+      return rejectWithValue('Cannot fetch Product Items');
     } catch (error) {
       dispatch(setAppError({ error: 'Connection Error' }));
       return rejectWithValue(null);

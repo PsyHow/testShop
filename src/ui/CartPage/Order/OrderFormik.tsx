@@ -6,7 +6,7 @@ import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 
-import { setOrderTC } from 'bll/cartReducer';
+import { getTotalPrice, setOrderTC } from 'bll/cartReducer';
 import styles from 'ui/CartPage/Order/OrderFormik.module.scss';
 import { ModalComponent } from 'ui/common/ModalComponent';
 
@@ -42,6 +42,7 @@ export const OrderFormik: FC = () => {
       formik.resetForm();
       dispatch(setOrderTC(values));
       localStorage.clear();
+      dispatch(getTotalPrice());
     },
   });
 

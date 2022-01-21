@@ -6,7 +6,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import { getItemsInCart, getTotalPrice } from 'bll/cartReducer';
 import { PATH } from 'constants/constants';
-import { selectAppStatus, selectItems, selectTotalPriceCount } from 'selectors/selectors';
+import { selectAppStatus, selectItems } from 'selectors/selectors';
 import { CartPageContainer } from 'ui/CartPage/CartPageContainer';
 import { ErrorSnackbar } from 'ui/common/ErrorSnackBar';
 import { Header } from 'ui/Header/Header';
@@ -15,7 +15,6 @@ import 'App.css';
 
 const App = (): ReactElement => {
   const dispatch = useDispatch();
-  const totalPrice = useSelector(selectTotalPriceCount);
   const status = useSelector(selectAppStatus);
   const itemsInCart = useSelector(selectItems);
 
@@ -24,7 +23,7 @@ const App = (): ReactElement => {
     if (valueAsString) {
       const itemsLocal = JSON.parse(valueAsString);
       dispatch(getItemsInCart({ items: itemsLocal }));
-      dispatch(getTotalPrice({ totalPrice }));
+      dispatch(getTotalPrice());
     }
   }, []);
   useEffect(() => {
