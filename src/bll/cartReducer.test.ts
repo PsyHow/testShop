@@ -1,13 +1,13 @@
 import {
   addItemInCart,
-  cartReducer,
   decrementItemCount,
   deleteItem,
   getItemsInCart,
   getTotalPrice,
   incItemCount,
   InitialStateType,
-} from 'bll/cartReducer';
+} from 'bll';
+import { cartReducer } from 'bll/cartReducer';
 
 let startState: InitialStateType = {
   items: [],

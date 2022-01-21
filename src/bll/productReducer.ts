@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { child, get } from 'firebase/database';
 
-import { setAppError, setAppStatus } from 'bll/appReducer/appReducer';
-import { ProductsType } from 'bll/cartReducer';
-import { dbRef } from 'testFirebase/base';
+import { setAppError, setAppStatus } from 'bll';
+import { dbRef } from 'testFirebase';
+import { ProductsType } from 'types';
 
 export const fetchProductItems = createAsyncThunk(
   'products/fetchProductsItems',

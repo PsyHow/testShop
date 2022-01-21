@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { Nullable, RequestStatusType } from 'types';
+
 const slice = createSlice({
   name: 'app',
   initialState: {
@@ -8,11 +10,9 @@ const slice = createSlice({
   } as InitialStateType,
   reducers: {
     setAppStatus(state, action: PayloadAction<{ status: RequestStatusType }>) {
-      // eslint-disable-next-line no-param-reassign
       state.status = action.payload.status;
     },
-    setAppError(state, action: PayloadAction<{ error: string | null }>) {
-      // eslint-disable-next-line no-param-reassign
+    setAppError(state, action: PayloadAction<{ error: Nullable<string> }>) {
       state.error = action.payload.error;
     },
   },
@@ -24,7 +24,5 @@ export const appReducer = slice.reducer;
 
 type InitialStateType = {
   status: RequestStatusType;
-  error: null | string;
+  error: Nullable<string>;
 };
-
-export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed';

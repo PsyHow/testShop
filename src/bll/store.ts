@@ -2,10 +2,9 @@ import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
-import { appReducer } from './appReducer/appReducer';
-import { productReducer } from './productReducer';
-
+import { appReducer } from 'bll/appReducer';
 import { cartReducer } from 'bll/cartReducer';
+import { productReducer } from 'bll/productReducer';
 
 const rootReducer = combineReducers({
   cartReducer,

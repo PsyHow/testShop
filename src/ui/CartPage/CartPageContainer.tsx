@@ -2,15 +2,10 @@ import { FC } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { CartPage } from './CartPage';
-
-import {
-  incItemCount,
-  deleteItem,
-  decrementItemCount,
-  ProductsType,
-} from 'bll/cartReducer';
-import { selectItems } from 'selectors/selectors';
+import { incItemCount, deleteItem, decrementItemCount } from 'bll';
+import { selectItems } from 'selectors';
+import { ProductsType } from 'types';
+import { CartPage } from 'ui';
 
 export const CartPageContainer: FC = () => {
   const dispatch = useDispatch();

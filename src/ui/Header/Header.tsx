@@ -8,8 +8,8 @@ import { Link } from 'react-router-dom';
 
 import styles from './Header.module.scss';
 
-import { PATH } from 'constants/constants';
-import { selectTotalPriceCount } from 'selectors/selectors';
+import { PATH } from 'const';
+import { selectTotalPriceCount } from 'selectors';
 
 export const Header: FC = () => {
   const totalPrice = useSelector(selectTotalPriceCount);

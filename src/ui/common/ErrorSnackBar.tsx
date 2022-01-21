@@ -4,8 +4,8 @@ import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setAppError } from 'bll/appReducer/appReducer';
-import { selectError } from 'selectors/selectors';
+import { setAppError } from 'bll';
+import { selectError } from 'selectors';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>((props, ref) => (
   // eslint-disable-next-line react/jsx-props-no-spreading

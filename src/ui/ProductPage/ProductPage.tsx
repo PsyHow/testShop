@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 
 import styles from './ProductPage.module.scss';
 
-import { ProductsType } from 'bll/cartReducer';
-import { PATH } from 'constants/constants';
+import { PATH } from 'const';
+import { ProductsType } from 'types';
 
 type PropsType = {
   products: ProductsType[];

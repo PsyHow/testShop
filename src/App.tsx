@@ -4,13 +4,11 @@ import { LinearProgress } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 
-import { getItemsInCart, getTotalPrice } from 'bll/cartReducer';
-import { PATH } from 'constants/constants';
-import { selectAppStatus, selectItems } from 'selectors/selectors';
-import { CartPageContainer } from 'ui/CartPage/CartPageContainer';
-import { ErrorSnackbar } from 'ui/common/ErrorSnackBar';
-import { Header } from 'ui/Header/Header';
-import { ProductPageContainer } from 'ui/ProductPage/ProductPageContainer';
+import { getItemsInCart, getTotalPrice } from 'bll';
+import { PATH } from 'const';
+import { selectAppStatus, selectItems } from 'selectors';
+import { CartPageContainer, ErrorSnackbar, Header, ProductPageContainer } from 'ui';
+
 import 'App.css';
 
 const App = (): ReactElement => {
@@ -28,6 +26,7 @@ const App = (): ReactElement => {
   }, []);
   useEffect(() => {
     localStorage.setItem('product', JSON.stringify(itemsInCart));
+    dispatch(getTotalPrice());
   }, [itemsInCart]);
 
   return (

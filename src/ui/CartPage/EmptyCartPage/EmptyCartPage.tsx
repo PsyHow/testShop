@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import styles from './EmptyCartPage.module.scss';
 
-import { PATH } from 'constants/constants';
+import { PATH } from 'const';
 
 export const EmptyCartPage: FC = () => (
   <div className={styles.cartBox}>

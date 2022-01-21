@@ -1,6 +1,5 @@
-import { RequestStatusType } from 'bll/appReducer/appReducer';
-import { ProductsType } from 'bll/cartReducer';
-import { AppRootStateType } from 'bll/store';
+import { AppRootStateType } from 'bll';
+import { Nullable, ProductsType, RequestStatusType } from 'types';
 
 export const selectItems = (state: AppRootStateType): ProductsType[] =>
   state.cartReducer.items;
@@ -10,5 +9,5 @@ export const selectItemsForProductPage = (state: AppRootStateType): ProductsType
   state.productReducer.items;
 export const selectAppStatus = (state: AppRootStateType): RequestStatusType =>
   state.appReducer.status;
-export const selectError = (state: AppRootStateType): string | null =>
+export const selectError = (state: AppRootStateType): Nullable<string> =>
   state.appReducer.error;

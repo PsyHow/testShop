@@ -1,12 +1,11 @@
 import { FC, useState } from 'react';
-import * as React from 'react';
 
 import { Box, Button, Modal, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 
 import styles from './ModalComponent.module.scss';
 
-import { selectTotalPriceCount } from 'selectors/selectors';
+import { selectTotalPriceCount } from 'selectors';
 
 const style = {
   position: 'absolute' as 'absolute',

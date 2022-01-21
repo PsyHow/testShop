@@ -4,7 +4,7 @@ import { Paper } from '@mui/material';
 
 import styles from './CartPageItemsList.module.scss';
 
-import { ProductsType } from 'bll/cartReducer';
+import { ProductsType } from 'types';
 
 type PropsType = {
   items: ProductsType[];

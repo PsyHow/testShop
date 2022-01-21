@@ -1,10 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ref, set } from 'firebase/database';
 
-import { setAppError, setAppStatus } from 'bll/appReducer/appReducer';
-import { AppRootStateType } from 'bll/store';
-import { db } from 'testFirebase/base';
-import { FormValuesType } from 'ui/CartPage/Order/OrderFormik';
+import { setAppError, setAppStatus, AppRootStateType } from 'bll';
+import { db } from 'testFirebase';
+import { FormValuesType, ProductsType } from 'types';
 
 export const setOrderTC = createAsyncThunk(
   'cart/setOrder',
@@ -87,13 +86,4 @@ export type InitialStateType = {
   items: ProductsType[];
   itemCount: number;
   totalPriceCount: number;
-};
-
-export type ProductsType = {
-  id: number;
-  name: string;
-  price: number;
-  photo: string;
-  itemCount: number;
-  totalPrice: number;
 };

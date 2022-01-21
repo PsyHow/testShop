@@ -4,10 +4,8 @@ import { Grid } from '@mui/material';
 
 import styles from './CartPage.module.scss';
 
-import { ProductsType } from 'bll/cartReducer';
-import { CartPageItemsList } from 'ui/CartPage/CartPageItemsList/CartPageItemsList';
-import { EmptyCartPage } from 'ui/CartPage/EmptyCartPage/EmptyCartPage';
-import { OrderFormik } from 'ui/CartPage/Order/OrderFormik';
+import { ProductsType } from 'types';
+import { CartPageItemsList, EmptyCartPage, OrderFormik } from 'ui';
 
 type PropsType = {
   decreaseProductQuantity: (item: ProductsType) => void;
