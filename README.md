@@ -8,7 +8,8 @@
 
 Shop page with a list of products that can be placed in the shopping cart. In the shopping cart, you can select the quantity and place an order.
 
-##Tech stack
+
+## Tech stack
 
 <h2 align="center">
     <img src="https://img.shields.io/badge/%E2%9C%94-React%20-yellowgreen"/>
